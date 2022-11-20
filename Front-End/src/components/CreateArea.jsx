@@ -1,39 +1,48 @@
-import React, { useState } from "react";
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import Fab from '@material-ui/core/Fab';
+import React, { useEffect, useState } from "react";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import Fab from "@material-ui/core/Fab";
+import axios from "../axios";
 
 function CreateArea(props) {
   const [note, setNote] = useState({
     title: "",
-    content: ""
+    content: "",
   });
 
   function handleChange(event) {
     const { name, value } = event.target;
 
-    setNote(prevNote => {
+    setNote((prevNote) => {
       return {
         ...prevNote,
-        [name]: value
+        [name]: value,
       };
     });
   }
 
   function submitNote(event) {
     props.onAdd(note);
+
+    const fetchData = async () => {
+      await axios.post("/api/v1/notes/new", {
+        title: note.title,
+        content: note.content,
+      });
+    };
+
+    fetchData();
+
     setNote({
       title: "",
-      content: ""
+      content: "",
     });
     event.preventDefault();
   }
 
- 
-  const [isClick,setClick] =useState(false)
-  const handleClick = () =>{
-    
-    setClick(true)
-  }
+  const [isClick, setClick] = useState(false);
+  const handleClick = () => {
+    setClick(true);
+  };
 
   return (
     <div>
@@ -46,25 +55,26 @@ function CreateArea(props) {
           onClick={handleClick}
         />
 
-        {isClick ? <textarea
-          name="content"
-          onChange={handleChange}
-          value={note.content}
-          placeholder="Take a note..."
-          
-         onClick={handleClick}
-          rows="3"
-          
-        /> : ""} 
-        
-        
-        {isClick ?
+        {isClick ? (
+          <textarea
+            name="content"
+            onChange={handleChange}
+            value={note.content}
+            placeholder="Take a note..."
+            onClick={handleClick}
+            rows="3"
+          />
+        ) : (
+          ""
+        )}
+
+        {isClick ? (
           <Fab onClick={submitNote}>
-         <AddCircleIcon /> 
-         </Fab>
-         : ""}
-          
-      
+            <AddCircleIcon />
+          </Fab>
+        ) : (
+          ""
+        )}
       </form>
     </div>
   );
