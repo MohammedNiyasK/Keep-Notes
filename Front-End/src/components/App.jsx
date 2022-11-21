@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
@@ -10,8 +10,8 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response =await axios.get("/api/v1/notes/sync");
-      console.log(response.data)
+      const response = await axios.get("/api/v1/notes/sync");
+      console.log(response.data);
       setNotes(response.data);
     };
 
@@ -27,7 +27,7 @@ function App() {
   function deleteNote(id) {
     setNotes((prevNotes) => {
       return prevNotes.filter((noteItem, index) => {
-        return index !== id;
+        return noteItem._id !== id;
       });
     });
   }

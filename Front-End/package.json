@@ -12,6 +12,7 @@
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-scripts": "3.2.0",
+    "socket.io-client": "^4.5.3",
     "y": "^0.3.2"
   },
   "devDependencies": {

@@ -4,8 +4,8 @@ import express from "express";
 import Note from "./db.js";
 import mongoose from "mongoose";
 import cors from "cors";
-
 const app = express();
+
 const port = process.env.PORT || 9000;
 
 app.use(express.json());
