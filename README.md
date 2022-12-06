@@ -1,6 +1,6 @@
 # MERN  Keep-Notes
 
-Keep Notes is a general note taking app like add notes and delete functionalites.
+Keep Notes is notes taking service you can quickly capture your mind into notes and get reminder later.
 
 # Tech stacks  
 
